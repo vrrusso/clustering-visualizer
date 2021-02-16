@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+
+
+<html>
+    <head>
+        <title>Clustering Tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class = "top-nav" id="myTopNav">
+            <a href="#home" class="active" >Clustering Visualizer</a>
+            <a href="#points" id="insert-button">Insert Points</a>
+            <a href="#points" id="clear-button">Clear all Points</a>
+            <a href="#cluster" id="cluster-button">Cluster</a>
+            <a href="javascript:void(0);" class="icon" onclick="openMiniMenu()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class = "coordinate-map" id="coord-map">
+        </div>
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="dropMenu.js"></script>
+    <script src="coordControl.js"></script>
+
+</html>
