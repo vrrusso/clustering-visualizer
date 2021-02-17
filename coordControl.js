@@ -1,4 +1,6 @@
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 //this event listener gets the click on the map
 $("#coord-map").click(on_click_map);
 $("#insert-button").click(on_click_insert_button);
@@ -9,6 +11,11 @@ $("#cluster-button").click(on_click_cluster_button);
 var num_points = 0;
 var points_coordinates = [];
 var applicarion_state = "inserting";
+
+
+var cluster_colors = ["#4D4DEC","#F98500"];
+
+var analising_color = "#CD21210";
 
 var num_clusters=2;
 
@@ -33,33 +40,43 @@ function on_click_map(){
 }
 
 function on_click_insert_button(){
-    applicarion_state = "inserting";
+    if(applicarion_state != "clustering"){
+        applicarion_state = "inserting";
+    }
 }
 
 function on_click_clear_button(){
-    applicarion_state = "inserting";
-    num_points = 0;
-    points_coordinates.length = 0;
-    console.log(points_coordinates);
-    $(".circle").remove();
+    if(applicarion_state != "clustering"){
+        applicarion_state = "inserting";
+        num_points = 0;
+        points_coordinates.length = 0;
+        console.log(points_coordinates);
+        $(".circle").remove();
+    }
 }
 
-function on_click_cluster_button(){
-    applicarion_state = "clustering";
-    let centroids = [];
-    let indexes = [];
-    for(var i=0;i<num_clusters;i++){
-        let index;
-        do{
-            index = getRandomInt(points_coordinates.length);
-        }while(indexes.includes(index));
-        indexes[i] = index;
-        console.log(index);
-        let centroid_aux = {x: points_coordinates[index].x,y:points_coordinates[index].y};
-        centroids[i] = centroid_aux;
-        $("#point"+index).css("background-color","red");
+async function on_click_cluster_button(){
+    if(applicarion_state != "clustering"){
+        applicarion_state = "clustering";
+        let centroids = [];
+        let indexes = [];
+        for(var i=0;i<num_clusters;i++){
+            let index;
+            do{
+                index = getRandomInt(points_coordinates.length);
+            }while(indexes.includes(index));
+            indexes[i] = index;
+            console.log(index);
+            let centroid_aux = {x: points_coordinates[index].x,y:points_coordinates[index].y};
+            centroids[i] = centroid_aux;
+            $("#point"+index).css("background-color",cluster_colors[i]);
+        }
+        await delay(1000);
+        
+
+        applicarion_state = "clustered";
+        //console.log(centroids);
     }
-    console.log(centroids);
 }
 
 
