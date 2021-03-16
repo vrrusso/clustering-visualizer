@@ -5,4 +5,4 @@ A webpage where you can draw your dataset, select your favorite clustering algor
 Access [Here](https://vrrusso.github.io/).
 
 
-OBS: DBSCAN animation is on development.
+OBS: DBSCAN animation is under development.
